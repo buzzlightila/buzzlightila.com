@@ -1,0 +1,103 @@
+<template>
+    <div id="screen">
+        <div id="bar">
+            <div id="icons">
+                <div id="red"></div>
+                <div id="yellow"></div>
+                <div id="green"></div>
+            </div>
+        </div>
+        <p class="font-dir">> root@{{ip}}:~$ <span class="command">{{command}}</span></p>
+        <p class="font-command_result">{{command_result}}</p>
+    </div>
+</template>
+<script>
+export default {
+  props: {
+    command: String,
+    command_result: String,
+    screen_w: String,
+    screen_h: String
+  },
+  data: () => ({
+    ip: "10.0.0.1"
+  }),
+  created() {
+    fetch("https://api.ipify.org?format=json")
+    .then(response => response.json())
+    .then(data => (this.ip = data.ip))
+  },
+}
+</script>
+<style>
+#head {
+    font-family: monospace;
+    margin: auto;
+    padding: 35px;
+    font-size: 40px;
+    text-align: center;
+}
+#bar {
+    text-align: center;
+    width: 100%;
+    height: 25px;
+    background-color: #3B3D3E;
+    font-family: monospace;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+#icons {
+    display: flex;
+    padding-left: 10px;
+    padding-top: 8px;
+}
+#red {
+    background-color: #FF5F57;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+#yellow {
+    background-color: #F2AE2E;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+#green {
+    background-color: #26BF30;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+}
+#screen {
+    background-color: #000000;
+    width: v-bind('screen_w');
+    height: v-bind('screen_h');
+    border-radius: 5px;
+    margin: 40px auto;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+    border: .1px solid rgb(168, 168, 168);
+}
+
+.font-dir {
+    color: #5EF2F2;
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+    position: static;
+    padding: 10px 10px 0px 10px;
+}
+.font-command_result {
+    color: #C7C8C8;
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+    position: static;
+    padding: 0px 10px 10px 10px;
+}
+.command {
+    color: #C7C8C8;
+}
+</style>
