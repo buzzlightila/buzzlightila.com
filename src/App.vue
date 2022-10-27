@@ -30,4 +30,9 @@ header {
   width: 15%;
   height: auto;
 }
+@media only screen and (max-width: 600px) {
+  .logo {
+    width: 40%;
+  }
+}
 </style>

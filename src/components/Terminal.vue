@@ -76,7 +76,7 @@ export default {
     width: v-bind('screen_w');
     height: v-bind('screen_h');
     border-radius: 5px;
-    margin: 40px auto;
+    margin: 30px auto;
     box-shadow: 0px 0px 20px rgb(0, 0, 0);
     border: .1px solid rgb(168, 168, 168);
 }
@@ -98,6 +98,6 @@ export default {
     padding: 0px 10px 10px 10px;
 }
 .command {
-    color: #C7C8C8;
+    color: #e6d09e;
 }
 </style>
