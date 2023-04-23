@@ -8,7 +8,7 @@
             </div>
         </div>
         <p class="font-dir">> root@{{ip}}:~$ <span class="command">{{command}}</span></p>
-        <p class="font-command_result">{{command_result}}</p>
+        <div ref="describer"></div>
     </div>
 </template>
 <script>
@@ -20,13 +20,23 @@ export default {
     screen_h: String
   },
   data: () => ({
-    ip: "10.0.0.1"
+    ip: "10.0.0.1",
   }),
   created() {
     fetch("https://api.ipify.org?format=json")
     .then(response => response.json())
     .then(data => (this.ip = data.ip))
   },
+  mounted() {
+
+        this.command_result.forEach(elm => {
+            var p = document.createElement('p')
+            p.className = "font-command_result"
+            // div.append
+            p.innerText = `--${elm.title}\n ${elm.description}`
+            this.$refs.describer.append(p)
+        })
+    }
 }
 </script>
 <style>
@@ -73,8 +83,8 @@ export default {
 }
 #screen {
     background-color: #000000;
-    width: v-bind('screen_w');
-    height: v-bind('screen_h');
+    width: 50%;
+    height: auto;
     border-radius: 5px;
     margin: 30px auto;
     box-shadow: 0px 0px 20px rgb(0, 0, 0);
