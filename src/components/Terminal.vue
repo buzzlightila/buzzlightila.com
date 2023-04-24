@@ -8,10 +8,11 @@
             </div>
         </div>
         <p class="font-dir">> root@{{ip}}:~$ <span class="command">{{command}}</span></p>
-        <div ref="describer"></div>
+        <div style="visibility: hidden;" ref="describer"></div>
     </div>
 </template>
 <script>
+import { ref } from 'vue'
 export default {
   props: {
     command: String,
@@ -26,20 +27,57 @@ export default {
     fetch("https://api.ipify.org?format=json")
     .then(response => response.json())
     .then(data => (this.ip = data.ip))
+    
   },
   mounted() {
+    this.command_result.forEach(elm => {
+        var p = document.createElement('p')
+        p.className = "font-command_result"
+        p.innerText = `--${elm.title}\n ${elm.description}`
+        this.$refs.describer.append(p)
+    })
 
-        this.command_result.forEach(elm => {
-            var p = document.createElement('p')
-            p.className = "font-command_result"
-            // div.append
-            p.innerText = `--${elm.title}\n ${elm.description}`
-            this.$refs.describer.append(p)
-        })
+    // typeAnimation
+    const cmd = document.querySelector('.command');
+    const cmdChars = [...cmd.textContent.trim()];
+
+    cmd.innerHTML = '';
+    let i = 0;
+    const timer = setInterval(() => {
+    cmd.append(cmdChars[i]);
+    if (++i === cmdChars.length) {
+        clearInterval(timer);
+        setTimeout(() => {
+        this.$refs.describer.style.visibility = '';
+        }, 400);
     }
+    }, 150);
+
+
+    },
 }
 </script>
 <style>
+
+/* .typingEffect > div {
+  padding: 10px;
+}
+
+.typingEffect code {
+  padding: 0;
+  background-color: inherit;
+}
+
+.typingEffect code {
+  width: fit-content;
+  height: fit-content;
+  border-right: 2px solid transparent;
+}
+
+.typingEffect__line1 {
+  animation: blink 1s 2;
+} */
+
 #head {
     font-family: monospace;
     margin: auto;
