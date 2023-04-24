@@ -59,25 +59,6 @@ export default {
 </script>
 <style>
 
-/* .typingEffect > div {
-  padding: 10px;
-}
-
-.typingEffect code {
-  padding: 0;
-  background-color: inherit;
-}
-
-.typingEffect code {
-  width: fit-content;
-  height: fit-content;
-  border-right: 2px solid transparent;
-}
-
-.typingEffect__line1 {
-  animation: blink 1s 2;
-} */
-
 #head {
     font-family: monospace;
     margin: auto;
